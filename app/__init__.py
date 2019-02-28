@@ -3,11 +3,13 @@
 from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
+import os
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123456@127.0.0.1/movie"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["SECRET_KEY"] = '8c5f43b3bd464b61b31634f605db00cd'
+app.config['UP_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)),"static/uploads")  # 配置文件上传目录
 app.debug = True
 db = SQLAlchemy(app)
 
