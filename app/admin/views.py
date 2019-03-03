@@ -334,7 +334,7 @@ def preview_add():
 
 
 # 定义预告列表视图
-@admin.route("/preview/list/<int:page>/", methods=["GET"])
+@admin.route("/preview/list/<int:page>/", methods=["GET","POST"])
 @admin_login_req
 @admin_auth
 def preview_list(page=None):
