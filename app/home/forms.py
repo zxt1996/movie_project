@@ -1,9 +1,10 @@
 # coding:utf8
 
 from flask_wtf import FlaskForm
-from wtforms.fields import SubmitField, StringField, PasswordField, FileField,TextAreaField
-from wtforms.validators import DataRequired, EqualTo, Email, Regexp,ValidationError
+from wtforms.fields import SubmitField, StringField, PasswordField, FileField, TextAreaField
+from wtforms.validators import DataRequired, EqualTo, Email, Regexp, ValidationError
 from app.models import User
+
 
 class RegistForm(FlaskForm):
     name = StringField(
@@ -72,19 +73,19 @@ class RegistForm(FlaskForm):
     )
 
     # 昵称验证
-    def validate_name(self,field):
+    def validate_name(self, field):
         name = field.data
         user = User.query.filter_by(name=name).count()
         if user == 1:
             raise ValidationError("昵称已经存在！")
 
-    def validate_email(self,field):
+    def validate_email(self, field):
         email = field.data
         user = User.query.filter_by(email=email).count()
         if user == 1:
             raise ValidationError("邮箱已经存在！")
 
-    def validate_phone(self,field):
+    def validate_phone(self, field):
         phone = field.data
         user = User.query.filter_by(phone=phone).count()
         if user == 1:
@@ -188,6 +189,7 @@ class UserdetailForm(FlaskForm):
         }
     )
 
+
 class PwdForm(FlaskForm):
     """修改密码"""
     old_pwd = PasswordField(
@@ -217,5 +219,25 @@ class PwdForm(FlaskForm):
         '修改密码',
         render_kw={
             "class": "btn btn-success"
+        }
+    )
+
+
+class CommentForm(FlaskForm):
+    content = TextAreaField(
+        label="内容",
+        validators=[
+            DataRequired("请输入内容！"),
+        ],
+        description="内容",
+        render_kw={
+            "id": "input_content"
+        }
+    )
+    submit = SubmitField(
+        '提交评论',
+        render_kw={
+            "class": "btn btn-success",
+            "id": "btn-sub"
         }
     )

@@ -104,10 +104,11 @@
 
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function() {   //用于响应文档已全部加载的事件
         $("img.lazy").lazyload({
             effect: "fadeIn"
         });
+        /*读取id为"do_search"的标签*/
         $("#do_search").click(function() {
             var key = $("#key_movie").val();
             location.href = "{{ url_for('home.search',page=1)}}?key="+key;
